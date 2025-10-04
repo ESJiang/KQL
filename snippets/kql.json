@@ -1,0 +1,659 @@
+{
+    "Timestamp": {
+        "prefix": "Timestamp",
+        "body": ["Timestamp"],
+        "description": "Timestamp of the event"
+    },
+    "evaluate": {
+        "prefix": "evaluate",
+        "body": ["evaluate ${1:pluginName}(${2:arguments})"],
+        "description": "Insert a KQL evaluate plugin snippet"
+    },
+    "invoke": {
+        "prefix": "invoke",
+        "body": ["invoke ${1:FunctionName}()"],
+        "description": "Runs the function on the table that it receives as input"
+    },
+    "range": {
+        "prefix": "range",
+        "body": ["range ${1:ColumnName} from ${2:Start} to ${3:End} step ${4:Step}"],
+        "description": "Generates a table with an arithmetic series of values"
+    },
+    "print": {
+        "prefix": "print",
+        "body": ["print ${1:ColumnName} = ${2:Expression}"],
+        "description": "Outputs a single row with one or more scalar expressions"
+    },
+    "ago": {
+        "prefix": "ago",
+        "body": ["ago(${1:duration})"],
+        "description": "Returns a datetime value representing a point in the past relative to now"
+    },
+    "Let": {
+        "prefix": "let",
+        "body": ["let ${1:VariableName} = ${2:Expression}"],
+        "description": "Define a variable in the query"
+    },
+    "Where": {
+        "prefix": "where",
+        "body": ["where ${1:Condition}"],
+        "description": "Filter rows based on a condition"
+    },
+    "RemoteIP": {
+        "prefix": "RemoteIP",
+        "body": ["RemoteIP"],
+        "description": "IP address of the remote endpoint"
+    },
+    "RemoteUrl": {
+        "prefix": "RemoteUrl",
+        "body": ["RemoteUrl"],
+        "description": "URL of the remote endpoint or request"
+    },
+    "Summarize": {
+        "prefix": "summarize",
+        "body": ["summarize ${1:AggregationFunction}(${2:Column}) by ${3:GroupColumn}"],
+        "description": "Aggregate rows using functions like count(), avg(), min(), max()"
+    },
+    "Project": {
+        "prefix": "project",
+        "body": ["project ${1:Column1}, ${2:Column2}"],
+        "description": "Select specific columns to include in output"
+    },
+    "Extend": {
+        "prefix": "extend",
+        "body": ["extend ${1:NewColumn} = ${2:Expression}"],
+        "description": "Add calculated columns to the result"
+    },
+    "Join": {
+        "prefix": "join",
+        "body": ["join kind=${1:inner|leftouter|rightouter} (${2:Table}) on ${3:Key}"],
+        "description": "Combine two tables based on a key"
+    },
+    "Union": {
+        "prefix": "union",
+        "body": ["union ${1:Table1}, ${2:Table2}"],
+        "description": "Combine multiple tables vertically"
+    },
+    "Top": {
+        "prefix": "top",
+        "body": ["top ${1:Column} ${2:N} by ${3:SortColumn}"],
+        "description": "Return top N records sorted by a column"
+    },
+    "Order": {
+        "prefix": "order",
+        "body": ["order by ${1:Column} ${2:asc|desc}"],
+        "description": "Sort rows by a column"
+    },
+    "Render": {
+        "prefix": "render",
+        "body": ["render ${1:VisualizationType}"],
+        "description": "Render query results in charts or tables"
+    },
+    "MvExpand": {
+        "prefix": "mv-expand",
+        "body": ["mv-expand"],
+        "description": "Expand multi-value array columns into multiple rows"
+    },
+    "MakeSet": {
+        "prefix": "make_set",
+        "body": ["make_set(${1:ColumnName})"],
+        "description": "Aggregate values into a dynamic array"
+    },
+    "DCount": {
+        "prefix": "dcount",
+        "body": ["dcount(${1:ColumnName})"],
+        "description": "Count distinct values of a column"
+    },
+    "lookup": {
+        "prefix": "lookup",
+        "body": ["lookup kind=${1:leftouter|inner} ( ${2:T2} ) on ${3:Attribute}"],
+        "description": "KQL lookup operator"
+    },
+    "project-away": {
+        "prefix": "project-away",
+        "body": ["project-away ${1:Column1}, ${2:Column2}"],
+        "description": "KQL project-away operator"
+    },
+    "project-keep": {
+        "prefix": "project-keep",
+        "body": ["project-keep ${1:Column1}, ${2:Column2}"],
+        "description": "KQL project-keep operator"
+    },
+    "project-rename": {
+        "prefix": "project-rename",
+        "body": ["project-rename ${1:NewName} = ${2:OldName}"],
+        "description": "KQL project-rename operator"
+    },
+    "project-reorder": {
+        "prefix": "project-reorder",
+        "body": ["project-reorder ${1:Column1}, ${2:Column2} asc"],
+        "description": "KQL project-reorder operator"
+    },
+    "sort": {
+        "prefix": "sort",
+        "body": ["sort by ${1:Column} ${2:asc|desc}"],
+        "description": "KQL sort operator"
+    },
+    "distinct": {
+        "prefix": "distinct",
+        "body": ["distinct ${1:Column1}, ${2:Column2}"],
+        "description": "KQL distinct operator"
+    },
+    "take": {
+        "prefix": "take",
+        "body": ["take ${1:NumberOfRows}"],
+        "description": "KQL take operator"
+    },
+    "DeviceEvents": {
+        "prefix": "DeviceEvents",
+        "body": ["DeviceEvents"],
+        "description": "Table storing endpoint device event logs"
+    },
+    "AlertEvents": {
+        "prefix": "AlertEvents",
+        "body": ["AlertEvents"],
+        "description": "Table storing security alert events"
+    },
+    "DeviceName": {
+        "prefix": "DeviceName",
+        "body": ["DeviceName"],
+        "description": "Name of the endpoint device"
+    },
+    "FileName": {
+        "prefix": "FileName",
+        "body": ["FileName"],
+        "description": "File involved in the event"
+    },
+    "InitiatingProcessFileName": {
+        "prefix": "InitiatingProcessFileName",
+        "body": ["InitiatingProcessFileName"],
+        "description": "File name of the process that triggered the event"
+    },
+    "ReportId": {
+        "prefix": "ReportId",
+        "body": ["ReportId"],
+        "description": "Unique identifier for the report"
+    },
+    "TimeGenerated": {
+        "prefix": "TimeGenerated",
+        "body": ["TimeGenerated"],
+        "description": "Timestamp when the event occurred"
+    },
+    "RemoteIPCountry": {
+        "prefix": "RemoteIPCountry",
+        "body": ["RemoteIPCountry"],
+        "description": "Country of the remote IP address"
+    },
+    "IPAddress": {
+        "prefix": "IPAddress",
+        "body": ["IPAddress"],
+        "description": "IP address involved in the event"
+    },
+    "AccountName": {
+        "prefix": "AccountName",
+        "body": ["AccountName"],
+        "description": "User account associated with the event"
+    },
+    "ActionType": {
+        "prefix": "ActionType",
+        "body": ["ActionType"],
+        "description": "Type of action performed (e.g., file creation, process start)"
+    },
+    "AlertSeverity": {
+        "prefix": "AlertSeverity",
+        "body": ["AlertSeverity"],
+        "description": "Severity level of a security alert"
+    },
+    "EventID": {
+        "prefix": "EventID",
+        "body": ["EventID"],
+        "description": "Unique identifier for the event type"
+    },
+    "DeviceType": {
+        "prefix": "DeviceType",
+        "body": ["DeviceType"],
+        "description": "Type of the device (e.g., server, workstation, mobile)"
+    },
+    "AccountDomain": {
+        "prefix": "AccountDomain",
+        "body": ["AccountDomain"],
+        "description": "Domain of the user account"
+    },
+    "IIF": {
+        "prefix": "iif",
+        "body": ["iif(${1:Condition}, ${2:TrueResult}, ${3:FalseResult})"],
+        "description": "Inline if statement for conditional logic"
+    },
+    "Case": {
+        "prefix": "case",
+        "body": ["case(${1:Condition1}, ${2:Result1}, ${3:Condition2}, ${4:Result2}, ${5:DefaultResult})"],
+        "description": "Case statement for multiple conditional expressions"
+    },
+    "Parse": {
+        "prefix": "parse",
+        "body": ["parse ${1:Column} with ${2:Pattern}"],
+        "description": "Extract values from a string using a pattern"
+    },
+    "Has": {
+        "prefix": "has",
+        "body": ["${1:Column} has '${2:Value}'"],
+        "description": "Filter rows where a column contains a specific value"
+    },
+    "ParseJSON": {
+        "prefix": "parse_json",
+        "body": ["parse_json(${1:JSONColumn})"],
+        "description": "Parse JSON string into a structured object"
+    },
+    "ParseCSV": {
+        "prefix": "parse_csv",
+        "body": ["parse_csv(${1:CSVColumn})"],
+        "description": "Parse CSV formatted string into columns"
+    },
+    "Count": {
+        "prefix": "count",
+        "body": ["count()"],
+        "description": "Count the number of rows"
+    },
+    "CountIf": {
+        "prefix": "countif",
+        "body": ["countif()"],
+        "description": "Count rows that meet a condition"
+    },
+    "EmailEvents": {
+        "prefix": "EmailEvents",
+        "body": ["EmailEvents"],
+        "description": "Table storing email events"
+    },
+    "IdentityLogonEvents": {
+        "prefix": "IdentityLogonEvents",
+        "body": ["IdentityLogonEvents"],
+        "description": "Table storing logon events for identities"
+    },
+    "IdentityQueryEvents": {
+        "prefix": "IdentityQueryEvents",
+        "body": ["IdentityQueryEvents"],
+        "description": "Table storing identity query events"
+    },
+    "IdentityDirectoryEvents": {
+        "prefix": "IdentityDirectoryEvents",
+        "body": ["IdentityDirectoryEvents"],
+        "description": "Table storing changes in identity directories"
+    },
+    "DeviceProcessEvents": {
+        "prefix": "DeviceProcessEvents",
+        "body": ["DeviceProcessEvents"],
+        "description": "Table storing process creation and termination events on devices"
+    },
+    "DeviceNetworkEvents": {
+        "prefix": "DeviceNetworkEvents",
+        "body": ["DeviceNetworkEvents"],
+        "description": "Table storing network activity events from devices"
+    },
+    "DeviceFileEvents": {
+        "prefix": "DeviceFileEvents",
+        "body": ["DeviceFileEvents"],
+        "description": "Table storing file creation, modification, and deletion events"
+    },
+    "DeviceRegistryEvents": {
+        "prefix": "DeviceRegistryEvents",
+        "body": ["DeviceRegistryEvents"],
+        "description": "Table storing registry changes on devices"
+    },
+    "DeviceLogonEvents": {
+        "prefix": "DeviceLogonEvents",
+        "body": ["DeviceLogonEvents"],
+        "description": "Table storing device logon and logoff events"
+    },
+    "DeviceImageLoadEvents": {
+        "prefix": "DeviceImageLoadEvents",
+        "body": ["DeviceImageLoadEvents"],
+        "description": "Table storing loaded executable or DLL images on devices"
+    },
+    "BehaviorEntities": {
+        "prefix": "BehaviorEntities",
+        "body": ["BehaviorEntities"],
+        "description": "Table storing entities related to detected behaviors"
+    },
+    "Distinct": {
+        "prefix": "distinct",
+        "body": ["distinct ${1:Column}"],
+        "description": "Return unique values of a column"
+    },
+    "MakeSeries": {
+        "prefix": "make-series",
+        "body": ["make-series ${1:Column}= ${2:AggregationFunction}(${3:Value}) default=${4:DefaultValue} on ${5:TimeColumn} step ${6:TimeStep}"],
+        "description": "Create a time series aggregation"
+    },
+    "MovingAvg": {
+        "prefix": "moving_avg",
+        "body": ["moving_avg(${1:Column}, ${2:Window})"],
+        "description": "Compute moving average over time series"
+    },
+    "Substring": {
+        "prefix": "substring",
+        "body": ["substring(${1:Column}, ${2:StartIndex}, ${3:Length})"],
+        "description": "Extract a substring from a column"
+    },
+    "FormatDatetime": {
+        "prefix": "format_datetime",
+        "body": ["format_datetime(${1:DateTimeColumn}, '${2:FormatString}')"],
+        "description": "Format datetime values to a specific string format"
+    },
+    "Bin": {
+        "prefix": "bin",
+        "body": ["bin(${1:Column}, ${2:Size})"],
+        "description": "Bin numeric or datetime values into buckets"
+    },
+    "Search": {
+        "prefix": "search",
+        "body": ["search ${1:Term} in (${2:Table1}, ${3:Table2})"],
+        "description": "Search across multiple tables"
+    },
+    "Contains": {
+        "prefix": "contains",
+        "body": ["${1:Column} contains '${2:Value}'"],
+        "description": "Filter rows where a column contains a value"
+    },
+    "StartsWith": {
+        "prefix": "startswith",
+        "body": ["startswith(${1:Column}, '${2:Value}')"],
+        "description": "Filter rows where a column starts with a value"
+    },
+    "In": {
+        "prefix": "in",
+        "body": ["${1:Column} in (${2:Value1}, ${3:Value2}, ${4:Value3})"],
+        "description": "Filter rows where a column matches one of a list of values"
+    },
+    "Between": {
+        "prefix": "between",
+        "body": ["${1:Column} between (${2:StartValue} .. ${3:EndValue})"],
+        "description": "Filter rows where a column is between two values"
+    },
+    "Datetime": {
+        "prefix": "datetime",
+        "body": ["datetime(${1:YYYY-MM-DDTHH:MM:SS})"],
+        "description": "Manipulate or extract datetime values"
+    },
+    "DatetimeDiff": {
+        "prefix": "datetime_diff",
+        "body": ["datetime_diff(${1:Column1}, ${2:Column2}, '${3:TimeUnit}')"],
+        "description": "Compute difference between two datetime columns"
+    },
+    "Round": {
+        "prefix": "round",
+        "body": ["round(${1:Column}, ${2:Decimals})"],
+        "description": "Round numeric values to specified decimals"
+    },
+    "SubstringOf": {
+        "prefix": "substringof",
+        "body": ["substringof('${1:Substring}', ${2:Column})"],
+        "description": "Check if substring exists in a string"
+    },
+    "ExternalData": {
+        "prefix": "externaldata",
+        "body": ["externaldata [${1:Column1}, ${2:Column2}] [@'${3:SourceURL}']"],
+        "description": "Import external data from files or URLs"
+    },
+    "RenderTable": {
+        "prefix": "render table",
+        "body": ["render table"],
+        "description": "Render the query results as a table"
+    },
+    "RenderTimeChart": {
+        "prefix": "render timechart",
+        "body": ["render timechart with (${1:Columns})"],
+        "description": "Render the results as a time chart"
+    },
+    "RenderBarChart": {
+        "prefix": "render barchart",
+        "body": ["render barchart with (${1:Columns})"],
+        "description": "Render the results as a bar chart"
+    },
+    "RenderPieChart": {
+        "prefix": "render piechart",
+        "body": ["render piechart with (${1:Columns})"],
+        "description": "Render the results as a pie chart"
+    },
+    "RenderColumnChart": {
+        "prefix": "render columnchart",
+        "body": ["render columnchart with (${1:Columns})"],
+        "description": "Render the results as a column chart"
+    },
+    "Ascending": {
+        "prefix": "asc",
+        "body": ["asc"],
+        "description": "Sort column in ascending order"
+    },
+    "Descending": {
+        "prefix": "desc",
+        "body": ["desc"],
+        "description": "Sort column in descending order"
+    },
+    "Investigate Password Spray": {
+        "prefix": "investigate_passwordspray",
+        "body": [
+            "IdentityLogonEvents",
+            "| where Timestamp >= ago(${1:variable})",
+            "| where AccountUpn == \"${2:variable}\"",
+            "| where ISP != \"INTERNAL_NETWORK\"",
+            "| where Location != \"${3:variable}\"",
+            "| where IPAddress != ''",
+            "| summarize",
+            "    FailedAttempts = count(),",
+            "    action = make_set(ActionType),",
+            "    isp = make_set(ISP),",
+            "    reason = make_set(FailureReason),",
+            "    Apps = make_set(Application),",
+            "    logontype = make_set(LogonType),",
+            "    devicetype = make_set(DeviceType),",
+            "    platform = make_set(OSPlatform),",
+            "    addinfo = make_set(AdditionalFields)",
+            "    by IPAddress",
+            "| order by FailedAttempts desc"
+        ],
+        "description": "Snippet to investigate password spray attempts in IdentityLogonEvents"
+    },
+    "InvestigateEmailEvents": {
+        "prefix": "investigate_EmailEvents",
+        "body": [
+            "EmailEvents",
+            "| where SenderIPv4 == \"${1:x.x.x.x}\"",
+            "| project Timestamp, SenderFromAddress, SenderFromDomain, RecipientEmailAddress, Subject, AdditionalFields",
+            "",
+            "let Emails = EmailEvents",
+            "| where SenderIPv4 == \"${1:x.x.x.x}\"",
+            "| project NetworkMessageId, Timestamp, SenderFromAddress, RecipientEmailAddress, Subject;",
+            "let Attachments = EmailAttachmentInfo",
+            "| project NetworkMessageId, FileName, FileType, SHA256, FileSize, DetectionMethods;",
+            "let Urls = EmailUrlInfo",
+            "| project NetworkMessageId, Url, UrlDomain;",
+            "Emails",
+            "| join kind = leftouter Attachments on NetworkMessageId",
+            "| join kind = leftouter Urls on NetworkMessageId",
+            "| project Timestamp, SenderFromAddress, RecipientEmailAddress, Subject,",
+            "          FileName, FileType, FileSize, SHA256,",
+            "          Url, UrlDomain",
+            "| order by Timestamp desc"
+        ],
+        "description": "Query EmailEvents with attachments and URLs, joined by NetworkMessageId"
+    },
+    "InvestigateFileEvent": {
+        "prefix": "investigate_FileEvent",
+        "body": [
+            "DeviceFileEvents",
+            "| where Timestamp > ago(${1:7d})",
+            "| where DeviceName contains \"${2:WORKSTATION01}\"",
+            "| where FileName =~ \"${3:Test.bat}\" and FolderPath has @\"C:\\\\Users\\\\${4:ember}\\\\Downloads\"",
+            "| project Timestamp, DeviceName, ActionType, FolderPath, FileName, FileOriginReferrerUrl, FileOriginIP, FileOriginUrl, AdditionalFields, InitiatingProcessFileName, InitiatingProcessCommandLine"
+        ],
+        "description": "Kusto query to investigate Mshta.exe related DeviceFileEvents"
+    },
+    "InvestigateNetworkEvent_1": {
+        "prefix": "investigate_NetworkEvent_RemoteURL",
+        "body": [
+            "DeviceNetworkEvents",
+            "| where Timestamp >= ago(${1:30d})",
+            "| where DeviceName has \"${2:workstation}\"",
+            "| where tolower(RemoteUrl) has \"${3:keyword}\" or tolower(RemoteDnsCanonicalNames) has \"${4:keyword}\"",
+            "| project",
+            "    Timestamp,",
+            "    DeviceName,",
+            "    DeviceId,",
+            "    InitiatingProcessFileName,",
+            "    InitiatingProcessCommandLine,",
+            "    InitiatingProcessId,",
+            "    InitiatingProcessCreationTime,",
+            "    RemoteUrl,",
+            "    RemoteDnsCanonicalNames,",
+            "    RemoteIP,",
+            "    RemotePort,",
+            "    Protocol",
+            "| order by Timestamp desc"
+        ],
+        "description": "General DeviceNetworkEvents query with known RemoteUrl"
+    },
+    "InvestigateNetworkEvent_2": {
+        "prefix": "investigate_NetworkEvent_InitiatingProcessFileName",
+        "body": [
+            "DeviceNetworkEvents",
+            "| where Timestamp >= ago(${1:30d})",
+            "| where InitiatingProcessFileName has \"${2:pdf}\"",
+            "| where ActionType in (\"Allowed\", \"ConnectionSuccess\")",
+            "| summarize",
+            "    Devices = make_set(DeviceName),",
+            "    DeviceCount = dcount(DeviceName),",
+            "    Processes = make_set(InitiatingProcessFileName),",
+            "    ActionTypes = make_set(ActionType),",
+            "    ConnectionCount = count()",
+            "    by RemoteIP, RemoteUrl",
+            "| order by ConnectionCount desc"
+        ],
+        "description": "General DeviceNetworkEvents query with known InitiatingProcessFileName"
+    },
+    "InvestigateC2Sites": {
+        "prefix": "Investigate_C2Sites",
+        "body": [
+            "let IOCs = dynamic([\"${1:malicious_domain1}\", \"${2:malicious_domain2}\"]);",
+            "let BrowserExecs = dynamic([\"chrome.exe\", \"msedge.exe\", \"firefox.exe\", \"brave.exe\", \"opera.exe\", \"Safari\"]);",
+            "let BrowserPaths = dynamic([",
+            "    @\"Google\\Chrome\\User Data\\Default\\Extensions\",",
+            "    @\"Microsoft\\Edge\\User Data\\Default\\Extensions\",",
+            "    @\"BraveSoftware\\Brave-Browser\\User Data\\Default\\Extensions\",",
+            "    @\"Opera Software\\Opera Stable\\Extensions\",",
+            "    @\"Mozilla\\Firefox\\Profiles\"",
+            "]);",
+            "",
+            "DeviceNetworkEvents",
+            "| where RemoteUrl has_any(IOCs)",
+            "| project Timestamp, DeviceName, InitiatingProcessFileName, InitiatingProcessCommandLine, InitiatingProcessParentFileName, InitiatingProcessAccountName, RemoteUrl, RemoteIP, RemotePort, ActionType",
+            "| order by Timestamp desc",
+            "",
+            "let BrowserNet = DeviceNetworkEvents",
+            "| where InitiatingProcessFileName in (BrowserExecs)",
+            "| where RemoteUrl has_any(IOCs)",
+            "| project Timestamp, DeviceName, InitiatingProcessFileName, InitiatingProcessCommandLine, InitiatingProcessParentFileName, InitiatingProcessAccountName, RemoteUrl, RemoteIP, RemotePort, ActionType;",
+            "",
+            "let ExtensionEvents = DeviceFileEvents",
+            "| where FolderPath contains BrowserPaths[0]",
+            "   or FolderPath contains BrowserPaths[1]",
+            "   or FolderPath contains BrowserPaths[2]",
+            "   or FolderPath contains BrowserPaths[3]",
+            "   or FolderPath contains BrowserPaths[4]",
+            "| project Timestamp, DeviceName, FileName, FolderPath, InitiatingProcessFileName;",
+            "",
+            "BrowserNet",
+            "| join kind=leftouter ExtensionEvents on DeviceName",
+            "| summarize",
+            "    UserSet = make_set(InitiatingProcessAccountName),",
+            "    Initiators = make_set(InitiatingProcessFileName),",
+            "    NetworkEvents = make_list(pack('Timestamp', Timestamp, 'CmdLine', InitiatingProcessCommandLine, 'RemoteUrl', RemoteUrl, 'Action', ActionType)),",
+            "    ExtensionEvents = make_list(pack('FolderPath', FolderPath, 'FileName', FileName))",
+            "  by DeviceName",
+            "| project DeviceName, UserSet, Initiators, NetworkEvents, ExtensionEvents"
+        ],
+        "description": "C2 IOC hunt across common browsers and correlate with extension-related file events"
+    },
+    "InvestigateLDAPActivity": {
+        "prefix": "Investigate_LDAP",
+        "body": [
+            "// Detect LDAP activity touching high-privilege groups on a specific device",
+            "DeviceEvents",
+            "| where Timestamp > ago(${1:7d})",
+            "| where DeviceName == \"${2:workstation1}\"",
+            "| where ActionType contains \"ldap\"",
+            "| where AdditionalFields has_any (\"${3:Schema Admins}\", \"${4:Domain Admins}\", \"${5:Enterprise Admins}\", \"${6:Organization Management}\", \"${7:Recipient Management}\")",
+            "| project",
+            "    Timestamp,",
+            "    DeviceName,",
+            "    InitiatingProcessFileName,",
+            "    InitiatingProcessCommandLine,",
+            "    InitiatingProcessAccountName",
+            "| order by Timestamp desc"
+        ],
+        "description": "Find LDAP details on critical admin groups for a device"
+    },
+    "InvestigateAADConnectReplication": {
+        "prefix": "Investigate_AADConnect",
+        "body": [
+            "DeviceEvents",
+            "| where Timestamp > ago(${1:7d})",
+            "| where DeviceName == \"${2:AADConnectServer}\"",
+            "| where ActionType contains \"replication\" or ActionType contains \"directory\"",
+            "| where InitiatingProcessAccountName contains \"${3:MSOL}\"",
+            "| project",
+            "    Timestamp,",
+            "    DeviceName,",
+            "    InitiatingProcessFileName,",
+            "    InitiatingProcessCommandLine,",
+            "    InitiatingProcessAccountName,",
+            "    AdditionalFields",
+            "| order by Timestamp desc"
+        ],
+        "description": "Check AAD Connect for replication/directory actions by MSOL accounts"
+    },
+    "InvestigateSingleAccountDevice": {
+        "prefix": "investigate_Single_Account_Device",
+        "body": [
+            "let deviceName = \"${1:xxx}\";",
+            "let accountname = \"${2:xxx}\";",
+            "union isfuzzy=true",
+            "(",
+            "    IdentityLogonEvents,",
+            "    IdentityQueryEvents,",
+            "    IdentityDirectoryEvents,",
+            "    DeviceProcessEvents,",
+            "    DeviceNetworkEvents,",
+            "    DeviceFileEvents,",
+            "    DeviceRegistryEvents,",
+            "    DeviceLogonEvents,",
+            "    DeviceImageLoadEvents,",
+            "    DeviceEvents,",
+            "    BehaviorEntities",
+            ")",
+            "| where Timestamp between (ago(${3:1d}) .. now())",
+            "| where DeviceName == deviceName and AccountName == accountname",
+            "| extend EventTable = \\$table",
+            "| order by Timestamp desc",
+            "| take 800"
+        ],
+        "description": "Query multiple tables for specific device and account activity within time range"
+    },
+    "InvestigateLogonActivityUsingSID": {
+        "prefix": "investigate_LogonActivity_SID",
+        "body": [
+            "DeviceLogonEvents",
+            "| where AccountSid == \"${1:s-x-x-xx-xxxx-xxx-xxx-xxxxx}\"",
+            "| project",
+            "    Timestamp,",
+            "    DeviceName,",
+            "    AccountName,",
+            "    AccountDomain,",
+            "    AccountSid,",
+            "    ActionType,",
+            "    LogonType,",
+            "    RemoteIP",
+            "| extend EventType = \"${2:Logon}\""
+        ],
+        "description": "Query DeviceLogonEvents for a specific AccountSid and mark EventType"
+    }
+}
