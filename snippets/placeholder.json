@@ -1,0 +1,7 @@
+{
+    "info": {
+        "prefix": "info",
+        "body": ["This extension provides KQL completions through VSCode CompletionItemProvider"],
+        "description": "Dynamic completions are provided at runtime"
+    }
+}
