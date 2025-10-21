@@ -16,9 +16,7 @@ export function createKqlDiagnostics(context: vscode.ExtensionContext): vscode.D
             ranges.push(new vscode.Range(new vscode.Position(lineIndex, match.index), new vscode.Position(lineIndex, match.index + match[0].length)));
         }
         const commentIndex = line.indexOf("//");
-        if (commentIndex >= 0) {
-            ranges.push(new vscode.Range(new vscode.Position(lineIndex, commentIndex), new vscode.Position(lineIndex, line.length)));
-        }
+        if (commentIndex >= 0) ranges.push(new vscode.Range(new vscode.Position(lineIndex, commentIndex), new vscode.Position(lineIndex, line.length)));
         return ranges;
     }
 
@@ -56,10 +54,8 @@ export function createKqlDiagnostics(context: vscode.ExtensionContext): vscode.D
 
     function updateDiagnostics(document: vscode.TextDocument) {
         if (document.languageId !== "kql") return;
-
         const diagnostics: vscode.Diagnostic[] = [];
         const lines = document.getText().split(/\r?\n/);
-
         for (let lineIndex = 0; lineIndex < lines.length; lineIndex++) {
             const line = lines[lineIndex];
             const ignoredRanges = getIgnoredRanges(line, lineIndex);
@@ -103,9 +99,7 @@ export function createKqlDiagnostics(context: vscode.ExtensionContext): vscode.D
     let updateTimer: NodeJS.Timeout | undefined;
     function scheduleUpdate(document: vscode.TextDocument) {
         if (updateTimer) clearTimeout(updateTimer);
-        updateTimer = setTimeout(() => {
-            updateDiagnostics(document);
-        }, 300);
+        updateTimer = setTimeout(() => updateDiagnostics(document), 300);
     }
     context.subscriptions.push(
         vscode.workspace.onDidOpenTextDocument(doc => scheduleUpdate(doc)),

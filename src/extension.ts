@@ -32,9 +32,7 @@ export function activate(context: vscode.ExtensionContext) {
                 if (!key) return undefined;
                 const keyword = kqlKeywords[key];
                 let markdown = `**${key}** (${keyword.type})\n\n${keyword.description}`;
-                if (keyword.body) {
-                    markdown += `\n\n\`\`\`kql\n${keyword.body}\n\`\`\``;
-                }
+                if (keyword.body) markdown += `\n\n\`\`\`kql\n${keyword.body}\n\`\`\``;
                 return new vscode.Hover(markdown, range);
             },
         })
@@ -50,9 +48,7 @@ export function activate(context: vscode.ExtensionContext) {
                     for (const [key, keyword] of Object.entries(kqlKeywords)) {
                         const item = new vscode.CompletionItem(key, mapCompletionItemKind(keyword.type));
                         item.detail = keyword.description;
-                        if (keyword.body) {
-                            item.insertText = new vscode.SnippetString(keyword.body);
-                        }
+                        if (keyword.body) item.insertText = new vscode.SnippetString(keyword.body);
                         item.documentation = new vscode.MarkdownString(`**${keyword.type}**\n\n${keyword.description}`);
                         if (["<>", "..", "<=", ">="].includes(key)) {
                             item.sortText = "000";

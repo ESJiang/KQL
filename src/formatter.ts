@@ -51,9 +51,7 @@ function parseKqlBlocks(lines: string[]): KqlBlock[] {
     for (let i = 0; i < lines.length; i++) {
         const rawLine = lines[i];
         const line = rawLine.trim();
-        if (!line) {
-            continue;
-        }
+        if (!line) continue;
         if (line.startsWith("//") || line.startsWith("/*")) {
             blocks.push({ type: "comment", text: rawLine });
             continue;
@@ -79,9 +77,7 @@ function parseKqlBlocks(lines: string[]): KqlBlock[] {
             if (children.length > 0) {
                 blocks.push({ type: "pipe", text: head, children });
                 i = j - 1;
-            } else {
-                blocks.push({ type: "pipe", text: head });
-            }
+            } else blocks.push({ type: "pipe", text: head });
             continue;
         }
         if (!line.startsWith("|") && line.includes("|")) {
@@ -101,9 +97,7 @@ function parseKqlBlocks(lines: string[]): KqlBlock[] {
                 j++;
             }
             let footer: string | undefined;
-            if (j < lines.length && lines[j].trim().startsWith(")")) {
-                footer = lines[j];
-            }
+            if (j < lines.length && lines[j].trim().startsWith(")")) footer = lines[j];
             blocks.push({ type: "function", text: head, children, footer });
             i = j;
             continue;
@@ -117,9 +111,7 @@ function parseKqlBlocks(lines: string[]): KqlBlock[] {
                 j++;
             }
             let footer: string | undefined;
-            if (j < lines.length && lines[j].trim().startsWith(")")) {
-                footer = lines[j];
-            }
+            if (j < lines.length && lines[j].trim().startsWith(")")) footer = lines[j];
             blocks.push({ type: "function", text: head, children, footer });
             i = j;
             continue;
@@ -140,15 +132,9 @@ function formatKqlBlocks(blocks: KqlBlock[], indentLevel = 0): string {
         const { indent = "", isFirstLine = false, suppressTopLevelSpacing = false } = opts;
         if (/^(?:\s*)(\/\/|\/\*|\*\/)/.test(line)) {
             line = line.trimStart();
-            if (line.startsWith("//")) {
-                line = "// " + line.slice(2).trimStart();
-            }
-            if (line.startsWith("/*")) {
-                line = "/* " + line.slice(2).trimStart();
-            }
-            if (line.startsWith("*/")) {
-                line = "*/" + line.slice(2);
-            }
+            if (line.startsWith("//")) line = "// " + line.slice(2).trimStart();
+            if (line.startsWith("/*")) line = "/* " + line.slice(2).trimStart();
+            if (line.startsWith("*/")) line = "*/" + line.slice(2);
         }
         const isComment = line.startsWith("//") || line.startsWith("/*");
         const startsWithNoIndent = noIndentKeywords.some(k => line.toLowerCase().startsWith(k.toLowerCase())) || isComment;
@@ -159,9 +145,7 @@ function formatKqlBlocks(blocks: KqlBlock[], indentLevel = 0): string {
             if (prevTrimmed !== "" && !prevIsComment) result.push("");
         }
         const isNewBlock = /^(datatable|union|summarize|project)\b/i.test(line) && indentLevel === 0;
-        if (!suppressTopLevelSpacing && result.length > 0 && isNewBlock) {
-            result.push("");
-        }
+        if (!suppressTopLevelSpacing && result.length > 0 && isNewBlock) result.push("");
         const finalLine = (startsWithNoIndent ? "" : indent) + line;
         result.push(finalLine);
     }
