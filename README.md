@@ -121,5 +121,6 @@ This extension provides syntax highlighting, code snippets, and formatting for K
 
 [Microsoft Learn: deviceprocessevents table](https://learn.microsoft.com/en-us/defender-xdr/advanced-hunting-deviceprocessevents-table)
 
+[Microsoft Sentinel security alert schema reference](https://learn.microsoft.com/en-us/azure/sentinel/security-alert-schema)
 
 Feel free to **open an issue** or **send a pull request** to help improve this extension :slightly_smiling_face:.
