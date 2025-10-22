@@ -89,10 +89,51 @@ export const kqlKeywords: Record<string, KqlKeyword> = {
     },
     dcount: { type: "function", description: "Count distinct values of a column", body: "dcount(${1:ColumnName})" },
     EmailEvents: { type: "table", description: "Email address associated with the event" },
+    ExposureGraphEdges: {
+        type: "table",
+        description: "Table provides visibility into relationships between entities and assets in the enterprise exposure graph",
+    },
+    ExposureGraphNodes: {
+        type: "table",
+        description: "Table contains organizational entities and their properties",
+    },
+    EmailPostDeliveryEvents: {
+        type: "table",
+        description:
+            "Table contains information about post-delivery actions taken on email messages processed by Microsoft 365. Use this reference to construct queries that return information from this table",
+    },
+    DeviceNetworkInfo: {
+        type: "table",
+        description:
+            "information about networking configuration of machines, including network adapters, IP and MAC addresses, and connected networks or domains",
+    },
+    MessageEvents: { type: "table", description: "Table contains details about messages sent and received within your organization at the time of delivery" },
+    OAuthAppInfo: {
+        type: "table",
+        description:
+            "Table contains information about Microsoft 365-connected OAuth applications in the organization that are registered with Microsoft Entra ID and available in the Microsoft Defender for Cloud Apps app governance capability",
+    },
+    MessageUrlInfo: { type: "table", description: "Table contains information about URLs sent through Microsoft Teams messages in your organization" },
+    UrlClickEvents: {
+        type: "table",
+        description:
+            "Table contains information about [Safe Links](https://learn.microsoft.com/en-us/defender-office-365/safe-links-about) clicks from email messages, Microsoft Teams, and Office 365 apps in supported desktop, mobile, and web apps",
+    },
+    MessagePostDeliveryEvents: {
+        type: "table",
+        description: "Table contains information about security events that occurred after the delivery of a Microsoft Teams message in your organization",
+    },
     IdentityLogonEvents: { type: "table", description: "Table storing logon events for identities" },
     IdentityQueryEvents: { type: "table", description: "Table storing identity query events" },
+    IdentityEvents: { type: "table", description: "Table contains information about identity events obtained from other cloud identity service providers" },
+    IdentityInfo: { type: "table", description: "Table contains information about user accounts obtained from various services, including Microsoft Entra ID" },
     IdentityDirectoryEvents: { type: "table", description: "Table storing changes in identity directories" },
     DeviceProcessEvents: { type: "table", description: "Table storing process creation and termination events on devices" },
+    DeviceTvmBrowserExtensions: {
+        type: "table",
+        description:
+            "Table contains information about browser extension installations found on devices from [Microsoft Defender Vulnerability Management](https://learn.microsoft.com/en-us/defender-vulnerability-management/defender-vulnerability-management)",
+    },
     DeviceNetworkEvents: { type: "table", description: "Table storing network activity events from devices" },
     DeviceFileEvents: { type: "table", description: "Table storing file creation, modification, and deletion events" },
     DeviceRegistryEvents: { type: "table", description: "Table storing registry changes on devices" },
@@ -275,7 +316,13 @@ export const kqlKeywords: Record<string, KqlKeyword> = {
         type: "field",
         description: "Description from the version information of the process (image file) responsible for the event",
     },
-    LogonId: { type: "field", description: "	Identifier for a logon session. This identifier is unique on the same device only between restarts" },
+    LogonId: { type: "field", description: "Identifier for a logon session. This identifier is unique on the same device only between restarts" },
+    IsLocalAdmin: { type: "field", description: "Boolean indicator of whether the user is a local administrator on the device" },
+    RemoteDeviceName: {
+        type: "field",
+        description:
+            "Name of the device that performed a remote operation on the affected device. Depending on the event being reported, this name could be a fully-qualified domain name (FQDN), a NetBIOS name or a host name without domain information",
+    },
     ProcessId: { type: "field", description: "Process ID (PID) of the newly created process" },
     ProcessCommandLine: { type: "field", description: "Command line used to create the new process" },
     ProcessIntegrityLevel: {
@@ -299,6 +346,10 @@ export const kqlKeywords: Record<string, KqlKeyword> = {
     },
     TimeGenerated: { type: "field", description: "The time the alert was generated (in UTC)" },
     RemoteIP: { type: "field", description: "IP address of the remote endpoint" },
+    RemoteIPType: {
+        type: "field",
+        description: "Type of IP address, for example Public, Private, Reserved, Loopback, Teredo, FourToSixMapping, and Broadcast",
+    },
     RemoteUrl: { type: "field", description: "URL of the remote endpoint or request" },
     RemoteIPCountry: { type: "field", description: "Country of the remote IP address" },
     IPAddress: { type: "field", description: "IP address involved in the event" },
@@ -452,7 +503,7 @@ export const kqlKeywords: Record<string, KqlKeyword> = {
     TenantId: { type: "field", description: "The unique ID of the tenant" },
     AdditionalFields: { type: "field", description: "Additional information about the event in JSON array format" },
     NetworkMessageId: { type: "field", description: "Unique identifier for the network message" },
-    EmailAttachmentInfo: { type: "field", description: "Information about attachments included in the email" },
+    EmailAttachmentInfo: { type: "table", description: "Information about attachments included in the email" },
     FileType: { type: "field", description: "The type of the file (e.g., .exe, .pdf, .docx)" },
     FileSize: { type: "field", description: "Size of the file in bytes" },
     SHA1: {
@@ -534,7 +585,10 @@ export const kqlKeywords: Record<string, KqlKeyword> = {
     FailureReason: { type: "field", description: "FailureReason field" },
     Application: { type: "field", description: "Application field" },
     OSPlatform: { type: "field", description: "OSPlatform field" },
-    EmailUrlInfo: { type: "field", description: "EmailUrlInfo field" },
+    EmailUrlInfo: {
+        type: "table",
+        description: "Table contains contains information about URLs on emails and attachments processed by Microsoft Defender for Office 365",
+    },
     UrlDomain: { type: "field", description: "UrlDomain field" },
     DeviceId: { type: "field", description: "Unique identifier for the device in the service" },
     InitiatingProcessId: { type: "field", description: "Process ID (PID) of the process that initiated the event" },
@@ -543,7 +597,7 @@ export const kqlKeywords: Record<string, KqlKeyword> = {
     InitiatingProcessFolderPath: { type: "field", description: "Folder containing the process (image file) that initiated the event" },
     InitiatingProcessParentId: { type: "field", description: "Process ID (PID) of the parent process that spawned the process responsible for the event" },
     RemoteDnsCanonicalNames: { type: "field", description: "Canonical DNS names of the remote host involved in the connection" },
-    RemotePort: { type: "field", description: "Network port on the remote host that was used in the connection" },
+    RemotePort: { type: "field", description: "TCP port on the remote device that was being connected to" },
     Protocol: { type: "field", description: "Network protocol used for the connection (e.g., TCP, UDP)" },
     and: { type: "keyword", description: "Logical AND operator used to combine multiple conditions" },
     or: { type: "keyword", description: "Logical OR operator used to combine multiple conditions" },
@@ -602,7 +656,7 @@ Emails
         body: `DeviceFileEvents
 | where Timestamp > ago(\${1:7d})
 | where DeviceName contains "\${2:WORKSTATION01}"
-| where FileName =~ "\${3:Test.bat}" and FolderPath has @"C:\\Users\\\${4:ember}\\Downloads"
+| where FileName =~ "\${3:Test.bat}" and FolderPath has @\"C:\\\\Users\\\\\${4:XXX}\\\\Downloads\"
 | project Timestamp, DeviceName, ActionType, FolderPath, FileName, FileOriginReferrerUrl, FileOriginIP, FileOriginUrl, AdditionalFields, InitiatingProcessFileName, InitiatingProcessCommandLine`,
     },
     InvestigateNetworkEvent_RemoteURL: {
@@ -649,25 +703,24 @@ Emails
         type: "snippet",
         description: "Hunt for C2 IOCs across browsers and extensions",
         body: `let IOCs = dynamic(["\${1:malicious_domain1}", "\${2:malicious_domain2}"]);
-let BrowserExecs = dynamic(["chrome.exe", "msedge.exe", "firefox.exe", "brave.exe", "opera.exe", "Safari"]);
+
+let BrowserExecs = dynamic(["chrome.exe", "msedge.exe", "firefox.exe", "brave.exe", "opera.exe"]);
+
 let BrowserPaths = dynamic([
-    @"Google\\Chrome\\User Data\\Default\\Extensions",
-    @"Microsoft\\Edge\\User Data\\Default\\Extensions",
-    @"BraveSoftware\\Brave-Browser\\User Data\\Default\\Extensions",
-    @"Opera Software\\Opera Stable\\Extensions",
-    @"Mozilla\\Firefox\\Profiles"
+@"Google\\Chrome\\User Data\\Default\\Extensions",
+@"Microsoft\\Edge\\User Data\\Default\\Extensions",
+@"BraveSoftware\\Brave-Browser\\User Data\\Default\\Extensions",
+@"Opera Software\\Opera Stable\\Extensions",
+@"Mozilla\\Firefox\\Profiles"
 ]);
 
-DeviceNetworkEvents
-| where RemoteUrl has_any(IOCs)
-| project Timestamp, DeviceName, InitiatingProcessFileName, InitiatingProcessCommandLine, InitiatingProcessParentFileName, InitiatingProcessAccountName, RemoteUrl, RemoteIP, RemotePort, ActionType
-| order by Timestamp desc
-
+// Network Events
 let BrowserNet = DeviceNetworkEvents
 | where InitiatingProcessFileName in (BrowserExecs)
 | where RemoteUrl has_any(IOCs)
 | project Timestamp, DeviceName, InitiatingProcessFileName, InitiatingProcessCommandLine, InitiatingProcessParentFileName, InitiatingProcessAccountName, RemoteUrl, RemoteIP, RemotePort, ActionType;
 
+// ExtensionEvents
 let ExtensionEvents = DeviceFileEvents
 | where FolderPath contains BrowserPaths[0]
     or FolderPath contains BrowserPaths[1]
@@ -676,6 +729,7 @@ let ExtensionEvents = DeviceFileEvents
     or FolderPath contains BrowserPaths[4]
 | project Timestamp, DeviceName, FileName, FolderPath, InitiatingProcessFileName;
 
+// Join two tables
 BrowserNet
 | join kind=leftouter ExtensionEvents on DeviceName
 | summarize
@@ -683,7 +737,7 @@ BrowserNet
     Initiators = make_set(InitiatingProcessFileName),
     NetworkEvents = make_list(pack('Timestamp', Timestamp, 'CmdLine', InitiatingProcessCommandLine, 'RemoteUrl', RemoteUrl, 'Action', ActionType)),
     ExtensionEvents = make_list(pack('FolderPath', FolderPath, 'FileName', FileName))
-  by DeviceName
+    by DeviceName
 | project DeviceName, UserSet, Initiators, NetworkEvents, ExtensionEvents`,
     },
 

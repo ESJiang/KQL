@@ -2,7 +2,7 @@
     "name": "kql-tools-vscode",
     "displayName": "KQL Tool",
     "description": "Provides syntax highlighting, customized snippets, and automatic formatting for Kusto Query Language (KQL) in VS Code",
-    "version": "0.2.1",
+    "version": "0.2.2",
     "publisher": "fangweij",
     "icon": "icon.png",
     "license": "MIT",
