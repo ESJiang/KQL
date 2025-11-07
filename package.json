@@ -1,0 +1,76 @@
+{
+    "name": "kql-tools-vscode",
+    "displayName": "KQL Tool",
+    "description": "Provides syntax highlighting, customized snippets, and automatic formatting for Kusto Query Language (KQL) in VS Code",
+    "version": "0.2.5",
+    "publisher": "fangweij",
+    "icon": "icon.png",
+    "license": "MIT",
+    "homepage": "https://github.com/ESJiang/KQL",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/ESJiang/KQL"
+    },
+    "engines": {
+        "vscode": "^1.104.0"
+    },
+    "categories": [
+        "Formatters",
+        "Programming Languages",
+        "Snippets"
+    ],
+    "capabilities": {
+        "untrustedWorkspaces": {
+            "supported": true
+        }
+    },
+    "main": "./out/extension.js",
+    "browser": "./out/extension.js",
+    "activationEvents": [
+        "workspaceContains:**/*.kql"
+    ],
+    "contributes": {
+        "languages": [
+            {
+                "id": "kql",
+                "aliases": [
+                    "KQL",
+                    "kql"
+                ],
+                "extensions": [
+                    ".kql"
+                ],
+                "configuration": "./language-configuration.json"
+            }
+        ],
+        "snippets": [
+            {
+                "language": "kql",
+                "path": "./snippets/placeholder.json"
+            }
+        ],
+        "grammars": [
+            {
+                "language": "kql",
+                "scopeName": "source.kql",
+                "path": "./syntaxes/kql.tmLanguage.json"
+            }
+        ]
+    },
+    "scripts": {
+        "compile": "webpack --mode development",
+        "watch": "webpack --mode development --watch",
+        "vscode:prepublish": "npm run package",
+        "package": "webpack --mode production --devtool hidden-source-map"
+    },
+    "devDependencies": {
+        "@types/mocha": "^10.0.10",
+        "@types/node": ">=16",
+        "@types/vscode": "^1.104.0",
+        "@vscode/test-electron": "^2.5.2",
+        "ts-loader": "^9.5.4",
+        "typescript": "^5.0.0",
+        "webpack": "^5.102.0",
+        "webpack-cli": "^6.0.1"
+    }
+}

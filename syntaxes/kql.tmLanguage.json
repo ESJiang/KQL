@@ -1,0 +1,111 @@
+{
+    "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+    "scopeName": "source.kql",
+    "fileTypes": ["kql"],
+    "patterns": [
+        { "include": "#Comments" },
+        { "include": "#Strings" },
+        { "include": "#Numbers" },
+        { "include": "#Operators" },
+        { "include": "#Keywords" },
+        { "include": "#Functions" },
+        { "include": "#AggregationFunctions" },
+        { "include": "#DataTypes" },
+        { "include": "#Variables" }
+    ],
+    "repository": {
+        "Comments": {
+            "patterns": [
+                { "match": "//.*", "name": "comment.singleline.kql" },
+                { "begin": "/\\*", "end": "\\*/", "name": "comment.block.kql" }
+            ]
+        },
+        "Strings": {
+            "patterns": [
+                {
+                    "begin": "@\"",
+                    "end": "\"",
+                    "name": "string.verbatim.doublequote.kql"
+                },
+                {
+                    "begin": "@'",
+                    "end": "'",
+                    "name": "string.verbatim.singlequote.kql"
+                },
+                {
+                    "match": "\".*?\"",
+                    "name": "string.doublequote.kql"
+                },
+                {
+                    "match": "'.*?'",
+                    "name": "string.singlequote.kql"
+                }
+            ]
+        },
+        "Numbers": {
+            "patterns": [
+                {
+                    "match": "\\b\\d+(\\.\\d+)?([eE][+-]?\\d+)?\\b",
+                    "name": "constant.numeric.kql"
+                },
+                { "match": "\\b\\d+(\\.\\d+)?%\\b", "name": "constant.percentage.kql" }
+            ]
+        },
+        "Operators": {
+            "patterns": [
+                {
+                    "match": "\\b(and|or|has|has_all|has_any|contains|startswith|endswith|in|not)\\b",
+                    "name": "keyword.logical.kql"
+                },
+                {
+                    "match": "(=~|!~|[=!><]=?|!)",
+                    "name": "keyword.operator.symbol.kql"
+                },
+                {
+                    "match": "\\b(by|on|from|to|step|with)\\b",
+                    "name": "keyword.clause.kql"
+                }
+            ]
+        },
+        "Keywords": {
+            "patterns": [
+                { "match": "\\b(let|set|alias|declare|pattern|query_parameters|restrict|access)\\b", "name": "keyword.define.kql" },
+                { "match": "\\b(if|else|case)\\b", "name": "keyword.flowcontrol.kql" },
+                {
+                    "match": "\\b(consume|distinct|evaluate|extend|externaldata|find|fork|getschema|join|make-series|mv-apply|mv-expand|project|parse|print|reduce|render|scan|search|serialize|summarize|top|union|where|desc|asc|eventcount)\\b",
+                    "name": "keyword.query.kql"
+                }
+            ]
+        },
+        "Functions": {
+            "patterns": [
+                {
+                    "match": "\\b(ago|iif|case|parse|parse_json|parse_csv|distinct|moving_avg|substring|format_datetime|bin|startswith|in|between|datetime|datetime_diff|round|substringof|externaldata|tolower)\\b",
+                    "name": "builtin.function.kql"
+                }
+            ]
+        },
+        "AggregationFunctions": {
+            "patterns": [
+                {
+                    "match": "\\b(avg|avgif|count|countif|covariance|covarianceif|covariancep|covariancepif|dcount|dcountif|make_set|make_list|max|maxif|min|minif|percentile|take_any|stdev|sum|sumif|variance|varianceif|variancep|variancepif)\\b",
+                    "name": "builtin.aggregation_function.kql"
+                }
+            ]
+        },
+        "DataTypes": {
+            "patterns": [
+                {
+                    "match": "\\b(bool|decimal|double|dynamic|guid|int|long|real|string|datetime|timespan|time|bag|array|object|variant)\\b",
+                    "name": "type.data.kql"
+                }
+            ]
+        },
+        "Variables": {
+            "patterns": [
+                { "match": "\\b(row_number|rank|bin_start|bin_end|\\$left|\\$right)\\b", "name": "variable.system.kql" },
+                { "match": "\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b", "name": "variable.other.kql" }
+            ]
+        }
+    }
+}

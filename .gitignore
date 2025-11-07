@@ -1,0 +1,10 @@
+out
+dist
+node_modules
+package-lock.json
+.vscode-test/
+.vscode
+*.vsix
+.DS_Store
+*.html
+vsc-extension-quickstart.md
